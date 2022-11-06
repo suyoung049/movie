@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+  <div class="container mt-5">
+    <div class="row g-5">
+      {% for article in articles %}
+      <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+        <div class="card" style="width: 18rem;">
+          {% if article.thumbnail %}
+
+          <img src="{{ article.thumbnail.url }}" class="card-img-top">
+          {% else %}
+          <img src="https://dummyimage.com/900x1200/000000/c4c4c4" class="card-img-top">
+          {% endif %}
+          <div style="background-color: rgb(165, 163, 163);" class="card-body ">
+            <h6 style="color: white;" class="card-title text-center">{{ article.title }}</h6>
+            <a href="{% url 'articles:detail' article.pk %}" class="float-end btn btn-dark my-3">영화정보</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% if request.user.is_authenticated %}
+      <a class="float-end btn btn-dark" href="{% url 'articles:create' %}">Registration</a>
+      {% else %}
+      <a class="float-end btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#exampleModal" href="">
+        Registration </a>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <p>로그인 필요</p>
+              <div class="float-end">
+                <a class="btn btn-dark" href="/accounts/login/?next=/articles/create/">로그인</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">돌아가기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<body>
+  <div class="container my-5">
+
+
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="mb-3"><label class="form-label" for="id_first_name">First name</label><input type="text"
+          name="first_name" value="{{request.user.first_name}}" maxlength="150" class="form-control"
+          placeholder="First name" id="id_first_name"></div>
+      <div class="mb-3"><label class="form-label" for="id_last_name">Last name</label><input type="text"
+          name="last_name" value="{{request.user.last_name}}" maxlength="150" class="form-control"
+          placeholder="Last name" id="id_last_name"></div>
+      <div class="mb-3"><label class="form-label" for="id_email">Email address</label><input type="email" name="email"
+          value="{{request.user.email}}" maxlength="254" class="form-control" placeholder="Email address" id="id_email">
+      </div>
+      <div class="mb-3"><label class="form-label" for="id_password">Password</label>
+        <div class="form-control-static" disabled id="id_password">
+
+          <strong>No password set.</strong>
+
+        </div>
+        <div class="form-text">Raw passwords are not stored, so there is no way to see this user’s password, but
+          you can
+          change the password using <a href="../password/">비밀번호 변경</a>.</div>
+      </div>
+      <button class="btn btn-primary" type="submit">수정</button>
+
+
+    </form>
+
+  </div>
+
+
+</body>
+{% endblock content %}
